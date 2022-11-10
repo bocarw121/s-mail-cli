@@ -1,14 +1,24 @@
 [package]
-name = "cool_cli"
-version = "0.1.0"
+name = "smail"
+version = "0.1.4"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT"
+authors = ["Bocar Wane < "]
+description = "Cli tool to easily send emails with attachments"
+repository = "https://github.com/bocarw121/s-mail-cli.git"
+categories = ["command-line-utilities", "command-line-interface", "email"]
+keywords = ["email", "attachments", "cli"]
+homepage = "https://github.com/bocarw121/s-mail-cli.git"
 
 [dependencies]
 clap = { version = "4.0.18", features = ["derive"] }
+lettre = "0.10.1"
 redis = "0.22.1"
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+dotenv = "0.15.0"
+base64 = "0.13.1"
+rand_core = { version = "0.6", features = ["std"] }
+colored = "2.0.0"
