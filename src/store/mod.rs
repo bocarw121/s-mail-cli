@@ -10,14 +10,13 @@ fn get_connection() -> Connection {
         std::process::exit(1)
     });
 
-    let connection = match client.get_connection() {
+    match client.get_connection() {
         Ok(connection) => connection,
         Err(_) => {
             eprintln!("{}", "Could not connect to redis".red());
             std::process::exit(1)
         }
-    };
-    connection
+    }
 }
 
 /// stores the users email in redis cache for future use
