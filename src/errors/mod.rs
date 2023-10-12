@@ -12,8 +12,8 @@ pub fn mailer_send_error(str_error: String) {
         eprintln!("{}", "Failed to lookup address information: double check your provider information using the credentials command".red());
         std::process::exit(1)
     } else {
-        eprintln!("{}", "Error sending email".red());
-        std::process::exit(1)
+        eprintln!("{} {}", "Error sending email".red(), str_error.red());
+        // std::process::exit(1)
     }
 }
 

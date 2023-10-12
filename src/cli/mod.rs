@@ -9,6 +9,8 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Mailer {
+    /// Get instructions on how to set up your credentials
+    INSTRUCTIONS,
     /// Store your email, password, and provider
     CREDENTIALS {
         /// You're email address ie name@gmail.com
