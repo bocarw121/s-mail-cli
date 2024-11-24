@@ -24,10 +24,7 @@ pub enum Mailer {
         provider: String,
     },
     /// Send an email
-    EMAIL {
-        /// The email address you would like to send as
-        #[arg(short, long)]
-        from_email: Option<String>,
+    Send {
 
         /// The email you would like to send to
         #[arg(short, long)]
