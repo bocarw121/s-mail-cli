@@ -6,7 +6,7 @@ use lettre::{
 };
 use std::fs;
 
-use lettre::message::{header::ContentType, Attachment, SinglePart};
+use lettre::message::{header::ContentType, Attachment, MultiPart, SinglePart};
 use crate::utils::parse_file_name;
 
 
@@ -24,28 +24,60 @@ pub async fn send_email(
     email_to: String,
     attachment: Option<String>,
     subject: Option<String>,
+    body: Option<String>,
 ) {
 
     let from_email =get_data("email".to_string());
     let attachment = handle_option(attachment);
     let subject = handle_option(subject);
+    let body = handle_option(body);
 
     let to_email_mbox = handle_mailbox(email_to.clone(), "Recipient email".to_string());
     let from_email_mbox = handle_mailbox(from_email.clone(), "Sender email".to_string());
+        let mut email;
 
-    let email = match Message::builder()
-        .from(from_email_mbox.clone())
-        .reply_to(from_email_mbox)
-        .to(to_email_mbox)
-        .subject(subject)
-        .singlepart(file_builder(attachment))
-    {
-        Ok(success) => success,
-        Err(_) => {
-            eprintln!("{}", format!("Error sending email to {}", email_to).red());
-            return;
-        }
-    };
+
+    if attachment.is_empty() {
+        // No attachment, just body
+        email = Message::builder()
+            .from(from_email_mbox)
+            .to(to_email_mbox)
+            .subject(subject)
+            .body(body)
+            .unwrap_or_else(|_| {
+                internal_error();
+                std::process::exit(1)
+            });
+    } else if body.is_empty() {
+        // No body, just attachment
+        let attachment_part = file_builder(attachment);
+        email = Message::builder()
+            .from(from_email_mbox)
+            .to(to_email_mbox)
+            .subject(subject)
+            .multipart(MultiPart::mixed().singlepart(attachment_part))
+            .unwrap_or_else(|_| {
+                internal_error();
+                std::process::exit(1)
+            });
+    } else {
+        // Both attachment and body
+        let attachment_part = file_builder(attachment);
+        email = Message::builder()
+            .from(from_email_mbox)
+            .to(to_email_mbox)
+            .subject(subject)
+            .multipart(
+                MultiPart::mixed()
+                    .singlepart(SinglePart::plain(body))
+                    .singlepart(attachment_part)
+            )
+            .unwrap_or_else(|_| {
+                internal_error();
+                std::process::exit(1)
+            });
+    }
+
 
     let password = get_data("password".to_string());
     let provider = get_data("provider".to_string());

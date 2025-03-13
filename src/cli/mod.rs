@@ -37,6 +37,10 @@ pub enum Mailer {
         /// email subject
         #[arg(short, long)]
         subject: Option<String>,
+
+        /// email body
+        #[arg(short, long)]
+        body: Option<String>,
     },
 
     /// Get a list of all the credentials

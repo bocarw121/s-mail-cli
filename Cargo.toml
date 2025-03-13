@@ -1,9 +1,9 @@
 [package]
 name = "smail"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 license = "MIT"
-authors = ["Bocar Wane < "]
+authors = ["Bocar Wane"]
 description = "Cli tool to easily send emails with attachments"
 repository = "https://github.com/bocarw121/s-mail-cli.git"
 categories = ["command-line-utilities", "command-line-interface", "email"]
@@ -12,11 +12,11 @@ homepage = "https://github.com/bocarw121/s-mail-cli.git"
 
 [dependencies]
 clap = { version = "4.0.18", features = ["derive"] }
-lettre = "0.10.1"
-redis = "0.23.3"
+lettre = "0.11.15"
+redis = "0.29.1"
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-base64 = "0.13.0"
+base64 = "0.22.1"
 rand_core = { version = "0.6", features = ["std"] }
-colored = "2.0.0"
+colored = "2.0.4"

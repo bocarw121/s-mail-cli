@@ -42,10 +42,11 @@ async fn main() {
             to_email,
             attachment,
             subject,
+            body
         } => {
             // Check the credentials before sending the email
             check_credentials_set();
-            send_email(to_email, attachment, subject).await
+            send_email(to_email, attachment, subject, body).await
         }
         Mailer::List => list_keys(),
         Mailer::INSTRUCTIONS => {
