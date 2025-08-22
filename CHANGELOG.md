@@ -13,3 +13,12 @@
   - Email with just a body
   - Email with just an attachment
   - Email with both body and attachment
+
+## 0.4.0
+
+- **BREAKING CHANGE**: Removed Redis dependency 
+- Replaced Redis storage with JSON file-based configuration
+- Configuration now stored in `smail.json` in user's home directory
+- Cross-platform support for Windows, Linux, and macOS
+- No external dependencies required - Redis server no longer needed
+- Existing credentials will need to be reconfigured due to storage change

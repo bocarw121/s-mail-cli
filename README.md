@@ -74,13 +74,18 @@ Options:
 
 ---
 
-### Redis Storage
+### Configuration Storage
 
-- **Redis** is used to store your email credentials securely. The email and provider are stored in plain text, while the password is encrypted before being saved.
-- Make sure you have Redis installed and running locally or configure it to use a Redis server in your environment.
+- **JSON Configuration**: Your email credentials are stored securely in a `smail.json` file in your home directory.
+- **Cross-platform**: Works on Windows, Linux, and macOS without any external dependencies.
+- **Location**: 
+  - Windows: `C:\Users\username\smail.json`
+  - Linux: `/home/username/smail.json`
+  - macOS: `/Users/username/smail.json`
 
 #### Notes:
-- **Security**: Always ensure that your Redis server is secured and not accessible to unauthorized users.
+- **Security**: The email and provider are stored in plain text, while the password is encrypted before being saved.
+- **Portability**: The configuration file can be easily backed up or transferred between systems.
 
 ---
 
